@@ -9,6 +9,12 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/tom0211/Flick/actions/workflows/build.yml"><img src="https://github.com/tom0211/Flick/actions/workflows/build.yml/badge.svg" alt="Build status"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/macOS-14%2B-lightgrey.svg" alt="macOS 14 or later">
+</p>
+
+<p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/screenshot-dark.png">
     <img src="docs/screenshot-light.png" alt="Flick's switcher: a Liquid Glass panel of window previews, with the selected window highlighted">
@@ -34,9 +40,11 @@ macOS's ⌘⇥ switches between apps, so getting to a particular window takes a 
 
 ## Install
 
-There are no prebuilt releases yet. Building from source takes a couple of minutes. Clone this repository, then from its folder:
+There are no prebuilt releases yet. Building from source takes a couple of minutes:
 
 ```sh
+git clone https://github.com/tom0211/Flick.git
+cd Flick
 scripts/make-signing-identity.sh   # optional: keeps permissions across rebuilds (see below)
 make install                       # builds Flick.app, copies it to /Applications and launches it
 ```
@@ -94,8 +102,8 @@ Flick is a small Swift package (AppKit + SwiftUI) with no dependencies.
 Quit Flick from its menu, delete `/Applications/Flick.app`, then optionally clear its permissions and settings:
 
 ```sh
-tccutil reset All local.flick.Flick
-defaults delete local.flick.Flick
+tccutil reset All io.github.tom0211.flick
+defaults delete io.github.tom0211.flick
 ```
 
 If you created the signing identity, delete "Flick Local Signing" in Keychain Access → login → My Certificates.

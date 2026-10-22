@@ -11,7 +11,7 @@ scripts/make-signing-identity.sh   # once: a local signing certificate so permis
 make run                           # build build/Flick.app and launch it
 ```
 
-Grant Accessibility (and optionally Screen Recording) when Flick asks. With the signing identity in place you only do this once. Without it, each build is signed ad hoc and macOS treats it as a new app. If permissions ever get stuck, `tccutil reset All local.flick.Flick` clears them.
+Grant Accessibility (and optionally Screen Recording) when Flick asks. With the signing identity in place you only do this once. Without it, each build is signed ad hoc and macOS treats it as a new app. If permissions ever get stuck, `tccutil reset All io.github.tom0211.flick` clears them.
 
 Other targets: `make build` (just `swift build`), `make install` (copy to /Applications), `make icon` (regenerate the app icon from `scripts/icon.swift`), `make clean`.
 
