@@ -1,4 +1,5 @@
 APP := build/Flick.app
+LSREGISTER := /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
 
 .PHONY: build app run install icon list clean
 
@@ -13,10 +14,13 @@ run: app
 	-pkill -x Flick && sleep 1
 	open $(APP)
 
+# Moves rather than copies, and makes the system forget the build copy, so Spotlight and "Open With" only
+# ever list the installed app.
 install: app
 	-pkill -x Flick && sleep 1
 	rm -rf /Applications/Flick.app
-	cp -R $(APP) /Applications/Flick.app
+	-$(LSREGISTER) -u $(APP)
+	mv $(APP) /Applications/Flick.app
 	open /Applications/Flick.app
 
 icon:
