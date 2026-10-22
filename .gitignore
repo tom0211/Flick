@@ -1,0 +1,11 @@
+.build/
+build/
+.swiftpm/
+.vscode/
+*.xcodeproj
+xcuserdata/
+.DS_Store
+
+# Default outputs of the debug helpers (Flick --render / --snapshot)
+flick-render.png
+flick-snapshot-*.png

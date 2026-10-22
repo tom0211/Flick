@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    # Flick uses macOS 26 SDK APIs (Liquid Glass), so it needs a runner with Xcode 26.
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Toolchain
+        run: |
+          swift --version
+          xcrun --show-sdk-version
+
+      - name: Build
+        run: swift build -c release
+
+      - name: Smoke test
+        run: .build/release/Flick --help
+
+      - name: Bundle
+        run: |
+          scripts/bundle.sh
+          # Zipped with ditto so the executable bit and code signature survive the artifact upload.
+          ditto -c -k --keepParent build/Flick.app build/Flick.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Flick
+          path: build/Flick.zip
